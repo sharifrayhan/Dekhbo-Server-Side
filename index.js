@@ -26,6 +26,67 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
+    const database = client.db("dekhboDB");
+    const netflixCollection = database.collection("netflixProducts");
+    const disneyCollection = database.collection("disneyProducts");
+    const chorkiCollection = database.collection("chorkiProducts");
+    const hboCollection = database.collection("hboProducts");
+    const amazonCollection = database.collection("amazonProducts");
+    const huluCollection = database.collection("huluProducts");
+    const cartCollection = database.collection("cartProducts");
+
+
+    app.post('/netflix', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await netflixCollection.insertOne(product);
+        res.send(result)
+      } )
+
+    app.post('/disney', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await disneyCollection.insertOne(product);
+        res.send(result)
+      } )
+
+    app.post('/chorki', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await chorkiCollection.insertOne(product);
+        res.send(result)
+      } )
+
+    app.post('/hbo', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await hboCollection.insertOne(product);
+        res.send(result)
+      } )
+
+    app.post('/amazon', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await amazonCollection.insertOne(product);
+        res.send(result)
+      } )
+
+    app.post('/hulu', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await huluCollection.insertOne(product);
+        res.send(result)
+      } )
+
+    app.post('/cart', async(req,res)=>{
+        const product = req.body;
+        console.log('hello', product)
+        const result = await cartCollection.insertOne(product);
+        res.send(result)
+      } )
+
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
