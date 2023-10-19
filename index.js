@@ -187,6 +187,175 @@ async function run() {
         res.send(product);
     })
 
+    app.get('/allproducts', async (req, res) => {
+        const collections = [
+            netflixCollection,
+            disneyCollection,
+            chorkiCollection,
+            hboCollection,
+            amazonCollection,
+            huluCollection,
+            cartCollection
+        ];
+    
+        const allProducts = [];
+    
+        for (const collection of collections) {
+            const products = await collection.find().toArray();
+            allProducts.push(...products);
+        }
+    
+        res.send(allProducts);
+    });
+
+    app.get('/allproducts/:id', async (req, res) => {
+        const id = req.params.id;
+        const collections = [
+            netflixCollection,
+            disneyCollection,
+            chorkiCollection,
+            hboCollection,
+            amazonCollection,
+            huluCollection,
+            cartCollection
+        ];
+    
+        for (const collection of collections) {
+            const query = { _id: new ObjectId(id) };
+            const product = await collection.findOne(query);
+            res.send(product);
+        }
+    
+    });
+    
+// Update method for brand items
+
+app.put('/netflix/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    const options ={upsert: true}
+    const newInfo = req.body;
+    const updatedProduct =  {
+        $set: {
+            name: newInfo.name,
+            brandName: newInfo.brandName,
+            type: newInfo.type,
+            price: newInfo.price,
+            rating: newInfo.rating,
+            details: newInfo.details,
+            image: newInfo.image,
+            selectedBrand: newInfo.selectedBrand,
+        }
+    }
+    const result = netflixCollection.updateOne(query, updatedProduct, options )
+    res.send(result)
+})
+app.put('/hbo/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    const options ={upsert: true}
+    const newInfo = req.body;
+    const updatedProduct =  {
+        $set: {
+            name: newInfo.name,
+            brandName: newInfo.brandName,
+            type: newInfo.type,
+            price: newInfo.price,
+            rating: newInfo.rating,
+            details: newInfo.details,
+            image: newInfo.image,
+            selectedBrand: newInfo.selectedBrand,
+        }
+    }
+    const result = hboCollection.updateOne(query, updatedProduct, options )
+    res.send(result)
+})
+
+app.put('/amazon/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    const options ={upsert: true}
+    const newInfo = req.body;
+    const updatedProduct =  {
+        $set: {
+            name: newInfo.name,
+            brandName: newInfo.brandName,
+            type: newInfo.type,
+            price: newInfo.price,
+            rating: newInfo.rating,
+            details: newInfo.details,
+            image: newInfo.image,
+            selectedBrand: newInfo.selectedBrand,
+        }
+    }
+    const result = amazonCollection.updateOne(query, updatedProduct, options )
+    res.send(result)
+})
+
+app.put('/hulu/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    const options ={upsert: true}
+    const newInfo = req.body;
+    const updatedProduct =  {
+        $set: {
+            name: newInfo.name,
+            brandName: newInfo.brandName,
+            type: newInfo.type,
+            price: newInfo.price,
+            rating: newInfo.rating,
+            details: newInfo.details,
+            image: newInfo.image,
+            selectedBrand: newInfo.selectedBrand,
+        }
+    }
+    const result = huluCollection.updateOne(query, updatedProduct, options )
+    res.send(result)
+})
+
+app.put('/chorki/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    const options ={upsert: true}
+    const newInfo = req.body;
+    const updatedProduct =  {
+        $set: {
+            name: newInfo.name,
+            brandName: newInfo.brandName,
+            type: newInfo.type,
+            price: newInfo.price,
+            rating: newInfo.rating,
+            details: newInfo.details,
+            image: newInfo.image,
+            selectedBrand: newInfo.selectedBrand,
+        }
+    }
+    const result = chorkiCollection.updateOne(query, updatedProduct, options )
+    res.send(result)
+})
+
+app.put('/disney/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    const options ={upsert: true}
+    const newInfo = req.body;
+    const updatedProduct =  {
+        $set: {
+            name: newInfo.name,
+            brandName: newInfo.brandName,
+            type: newInfo.type,
+            price: newInfo.price,
+            rating: newInfo.rating,
+            details: newInfo.details,
+            image: newInfo.image,
+            selectedBrand: newInfo.selectedBrand,
+        }
+    }
+    const result = disneyCollection.updateOne(query, updatedProduct, options )
+    res.send(result)
+})
+    
+
 
 
     // Send a ping to confirm a successful connection
