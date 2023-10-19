@@ -36,6 +36,7 @@ async function run() {
     const huluCollection = database.collection("huluProducts");
     const cartCollection = database.collection("cartProducts");
 
+// Post Methods for different brands and cart
 
     app.post('/netflix', async(req,res)=>{
         const product = req.body;
@@ -85,6 +86,107 @@ async function run() {
         const result = await cartCollection.insertOne(product);
         res.send(result)
       } )
+
+    //   Get methods for brands and cart
+
+    app.get('/netflix', async(req,res)=>{
+        const cursor = netflixCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/netflix/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await netflixCollection.findOne( query );
+        res.send(product);
+    })
+
+    app.get('/hulu', async(req,res)=>{
+        const cursor = huluCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/hulu/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await huluCollection.findOne( query );
+        res.send(product);
+    })
+
+    app.get('/amazon', async(req,res)=>{
+        const cursor = amazonCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/amazon/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await amazonCollection.findOne( query );
+        res.send(product);
+    })
+
+    app.get('/chorki', async(req,res)=>{
+        const cursor = chorkiCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/chorki/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await chorkiCollection.findOne( query );
+        res.send(product);
+    })
+
+    app.get('/disney', async(req,res)=>{
+        const cursor = disneyCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/disney/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await disneyCollection.findOne( query );
+        res.send(product);
+    })
+
+    app.get('/hbo', async(req,res)=>{
+        const cursor = hboCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/hbo/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await hboCollection.findOne( query );
+        res.send(product);
+    })
+
+    app.get('/cart', async(req,res)=>{
+        const cursor = cartCollection.find()
+        const result = await cursor.toArray()
+        res.send(result)
+    })
+
+    app.get('/cart/:id', async(req,res)=>{
+        const id = req.params.id;
+        const query = {_id: new ObjectId(id)}
+        console.log('i need data for id :', id);
+        const product =  await cartCollection.findOne( query );
+        res.send(product);
+    })
+
 
 
     // Send a ping to confirm a successful connection
