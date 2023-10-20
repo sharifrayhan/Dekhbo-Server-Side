@@ -181,7 +181,7 @@ async function run() {
 
     app.get('/cart/:id', async(req,res)=>{
         const id = req.params.id;
-        const query = {_id: new ObjectId(id)}
+        const query = {_id: id}
         console.log('i need data for id :', id);
         const product =  await cartCollection.findOne( query );
         res.send(product);
@@ -354,9 +354,16 @@ app.put('/disney/:id', async(req,res)=>{
     const result = disneyCollection.updateOne(query, updatedProduct, options )
     res.send(result)
 })
-    
 
 
+// Delete from cart
+
+app.delete('/cart/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: id}
+    const result = await cartCollection.deleteOne(query)
+    res.send(result)
+})
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
