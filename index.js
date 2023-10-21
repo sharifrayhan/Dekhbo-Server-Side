@@ -181,7 +181,7 @@ async function run() {
 
     app.get('/cart/:id', async(req,res)=>{
         const id = req.params.id;
-        const query = {_id: id}
+        const query = {_id: new ObjectId(id)}
         console.log('i need data for id :', id);
         const product =  await cartCollection.findOne( query );
         res.send(product);
@@ -360,7 +360,8 @@ app.put('/disney/:id', async(req,res)=>{
 
 app.delete('/cart/:id', async(req,res)=>{
     const id = req.params.id;
-    const query = {_id: id}
+    const query = {_id: new ObjectId(id)}
+    console.log("i want to delete", id, query)
     const result = await cartCollection.deleteOne(query)
     res.send(result)
 })
